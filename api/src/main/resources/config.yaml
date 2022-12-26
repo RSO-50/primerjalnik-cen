@@ -9,7 +9,7 @@ kumuluzee:
       port: 8080
   datasources:
     - jndi-name: jdbc/PrimerjalnikCenMetadataDS
-      connection-url: jdbc:postgresql://172.19.0.2:5432/primerjalnik-cen
+      connection-url: jdbc:postgresql://172.20.0.2:5432/primerjalnik-cen
       username: dbuser
       password: postgres
       pool:
