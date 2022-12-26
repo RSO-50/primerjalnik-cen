@@ -1,9 +1,7 @@
 package si.rsvo.primerjalnikcen.models.converters;
 
-import si.rsvo.primerjalnikcen.lib.IzdelkiMetadata;
-import si.rsvo.primerjalnikcen.models.entities.UporabnikoviIzdelkiMetadataEntity;
-
-public class UporabnikoviIzdelkiMetadataConverter {
+public class PrimerjalnikCenMetadataConverter {
+/*
 
     public static IzdelkiMetadata toDto(UporabnikoviIzdelkiMetadataEntity entity) {
 
@@ -26,5 +24,6 @@ public class UporabnikoviIzdelkiMetadataConverter {
         return entity;
 
     }
+*/
 
 }
