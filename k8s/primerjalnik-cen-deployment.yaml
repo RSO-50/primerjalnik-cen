@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: primerjalnik-cen-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: primerjalnik-cen
+  template:
+    metadata:
+      labels:
+        app: primerjalnik-cen
+    spec:
+      containers:
+        - image: rsoskupina50/primerjalnik-cen:2022-12-08-19-19-03
+          name: primerjalnik-cen
+          env:
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://snuffleupagus.db.elephantsql.com/jywwgduy
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: jywwgduy
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              value: a29w4D2ZegIYz4sIsUZOJzoIBLP6vPJS
+          ports:
+            - containerPort: 8080
+              name: server
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /health/live
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /health/ready
+              port: server
+            initialDelaySeconds: 20
+            periodSeconds: 3
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: primerjalnik-cen
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      protocol: TCP
+      targetPort: server
+  selector:
+    app: primerjalnik-cen
