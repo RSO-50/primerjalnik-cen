@@ -47,8 +47,7 @@ public class PrimerjalnikCenMetadataBean {
 
         try {
             return httpClient
-                    .target(baseUrl + "izdelki/v1/izdelki/byNaziv")
-                    .queryParam("naziv", naziv)
+                    .target(baseUrl + "izdelki/v1/izdelki/byNaziv/" + naziv)
                     .request().get();
         }
         catch (WebApplicationException | ProcessingException e) {
@@ -57,7 +56,7 @@ public class PrimerjalnikCenMetadataBean {
         }
     }
 
-    public Integer getIzdelkiByNazivFallback(String username) {
+    public Response getIzdelkiByNazivFallback(String username) {
         return null;
     }
 
