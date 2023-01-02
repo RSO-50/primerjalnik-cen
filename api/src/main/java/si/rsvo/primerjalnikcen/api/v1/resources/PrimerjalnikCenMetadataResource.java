@@ -54,6 +54,9 @@ public class PrimerjalnikCenMetadataResource {
     public Response changeCurrency(@Parameter(description = "Prvotna valuta", required = true) @PathParam("from") String from,
                                    @Parameter(description = "Željena valuta", required = true) @PathParam("to") String to,
                                    @Parameter(description = "Količina", required = true) @PathParam("amount") Integer amount) {
+        System.out.println(from);
+        System.out.println(to);
+        System.out.println(amount);
 
         return primerjalnikCenMetadataBean.changeCurrency(from, to, amount);
     }

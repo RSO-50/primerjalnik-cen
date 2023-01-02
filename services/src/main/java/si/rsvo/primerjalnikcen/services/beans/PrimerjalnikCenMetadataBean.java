@@ -65,15 +65,13 @@ public class PrimerjalnikCenMetadataBean {
 
         try {
             return httpClient
-                    .target("https://currency-converter5.p.rapidapi.com/currency/convert")
-                    .queryParam("format", "json")
+                    .target("https://currency-exchange.p.rapidapi.com/exchange")
                     .queryParam("from", from)
                     .queryParam("to", to)
-                    .queryParam("amount", amount)
-                    .queryParam("language", "en")
+                    .queryParam("q", amount)
                     .request()
                     .header("X-RapidAPI-Key", "89fb19875bmsh587f5c2b402a175p14f26fjsnb4cb50778b70")
-                    .header("X-RapidAPI-Host", "currency-converter5.p.rapidapi.com")
+                    .header("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
                     .get();
         }
         catch (WebApplicationException | ProcessingException e) {
