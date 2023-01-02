@@ -82,7 +82,7 @@ public class PrimerjalnikCenMetadataBean {
         }
     }
 
-    public Response changeCurrencyFallback() { return null; }
+    public Response changeCurrencyFallback(String from, String to, Integer amount) { return null; }
 
     public Response getIzdelkiByNazivFallback(String username) {
         return null;

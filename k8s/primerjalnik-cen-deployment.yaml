@@ -13,7 +13,7 @@ spec:
         app: primerjalnik-cen
     spec:
       containers:
-        - image: rsoskupina50/primerjalnik-cen:2023-01-02-13-39-01
+        - image: rsoskupina50/primerjalnik-cen:2023-01-02-14-24-32
           name: primerjalnik-cen
           env:
             - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
