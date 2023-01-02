@@ -15,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javax.ws.rs.client.WebTarget;
 
 import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
 import org.eclipse.microprofile.faulttolerance.Fallback;
@@ -55,24 +56,26 @@ public class PrimerjalnikCenMetadataBean {
             throw new InternalServerErrorException(e);
         }
     }
-
-    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
-    @CircuitBreaker(requestVolumeThreshold = 3)
-    @Fallback(fallbackMethod = "changeCurrencyFallback")
+//
+//    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+//    @CircuitBreaker(requestVolumeThreshold = 3)
+//    @Fallback(fallbackMethod = "changeCurrencyFallback")
     public Response changeCurrency(String from, String to, Integer amount) {
 
         log.info("Calling currency API from RapidAPI marketplace");
 
         try {
-            return httpClient
-                    .target("https://currency-exchange.p.rapidapi.com/exchange")
+            WebTarget target = httpClient.target("https://currency-exchange.p.rapidapi.com/exchange")
                     .queryParam("from", from)
                     .queryParam("to", to)
-                    .queryParam("q", amount)
-                    .request()
+                    .queryParam("q", amount);
+
+            Response response = target.request()
                     .header("X-RapidAPI-Key", "89fb19875bmsh587f5c2b402a175p14f26fjsnb4cb50778b70")
                     .header("X-RapidAPI-Host", "currency-exchange.p.rapidapi.com")
                     .get();
+
+            return response;
         }
         catch (WebApplicationException | ProcessingException e) {
             log.severe(e.getMessage());
