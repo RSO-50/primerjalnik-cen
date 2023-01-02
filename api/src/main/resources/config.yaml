@@ -22,6 +22,8 @@ kumuluzee:
     web-instrumentation:
       - name: primerjalnik-cen-endpoint
         url-pattern: /v1/primerjalnikCen/*
+  swagger:
+    base-url: http://20.73.139.35/primerjalnik-cen/
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                           <Configuration name="comments">
