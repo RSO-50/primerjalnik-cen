@@ -21,6 +21,7 @@ public class DemoResource {
 
     @Inject
     private RestProperties restProperties;
+    @Inject
     private AppProperties appProperties;
 
     @POST
