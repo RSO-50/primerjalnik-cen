@@ -56,6 +56,34 @@ public class PrimerjalnikCenMetadataBean {
         }
     }
 
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Fallback(fallbackMethod = "changeCurrencyFallback")
+    public Response changeCurrency(String from, String to, Integer amount) {
+
+        log.info("Calling currency API from RapidAPI marketplace");
+
+        try {
+            return httpClient
+                    .target("https://currency-converter5.p.rapidapi.com/currency/convert")
+                    .queryParam("format", "json")
+                    .queryParam("from", from)
+                    .queryParam("to", to)
+                    .queryParam("amount", amount)
+                    .queryParam("language", "en")
+                    .request()
+                    .header("X-RapidAPI-Key", "89fb19875bmsh587f5c2b402a175p14f26fjsnb4cb50778b70")
+                    .header("X-RapidAPI-Host", "currency-converter5.p.rapidapi.com")
+                    .get();
+        }
+        catch (WebApplicationException | ProcessingException e) {
+            log.severe(e.getMessage());
+            throw new InternalServerErrorException(e);
+        }
+    }
+
+    public Response changeCurrencyFallback() { return null; }
+
     public Response getIzdelkiByNazivFallback(String username) {
         return null;
     }

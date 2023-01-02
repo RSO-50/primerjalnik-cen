@@ -49,4 +49,12 @@ public class PrimerjalnikCenMetadataResource {
         return primerjalnikCenMetadataBean.getIzdelkiByNaziv(naziv);
     }
 
+    @POST
+    @Path("/changeCurrency/{from}/{to}/{amount}")
+    public Response changeCurrency(@Parameter(description = "Prvotna valuta", required = true) @PathParam("from") String from,
+                                   @Parameter(description = "Željena valuta", required = true) @PathParam("to") String to,
+                                   @Parameter(description = "Količina", required = true) @PathParam("amount") Integer amount) {
+
+        return primerjalnikCenMetadataBean.changeCurrency(from, to, amount);
+    }
 }
